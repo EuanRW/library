@@ -3,16 +3,17 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
+}
+
+Book.prototype.info = function () {
     let readText;
-    if (read) {
+    if (this.read) {
       readText = "completed reading.";
     } else {
       readText = "have not read yet.";
     }
-    return title + " by " + author + ", " + pages + " pages, " + readText;
+    return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.readText;
   };
-}
 
 const book1 = new Book("The Hobit", "J.R.R Tolkien", 295, true);
 console.log(book1.info()); // logs 'steve'
