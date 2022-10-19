@@ -1,3 +1,5 @@
+let myLibrary = [];
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -6,14 +8,27 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.info = function () {
-    let readText;
-    if (this.read) {
-      readText = "completed reading.";
-    } else {
-      readText = "have not read yet.";
-    }
-    return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.readText;
-  };
+  const readText = this.read ? "completed reading." : "have not read yet.";
 
-const book1 = new Book("The Hobit", "J.R.R Tolkien", 295, true);
-console.log(book1.info()); // logs 'steve'
+  return (
+    this.title +
+    " by " +
+    this.author +
+    ", " +
+    this.pages +
+    " pages, " +
+    readText
+  );
+};
+
+function addBookToLibrary(book) {
+  myLibrary.push(book)
+}
+
+const book1 = new Book("The Hobit", "J.R.R Tolkien", 310, false);
+const book2 = new Book("A Promised Land", "Barrack Obama", 700, false);
+const book3 = new Book("All Quiet On The Western Front", "Erich Maria Remarque", 200, false)
+
+addBookToLibrary(book1)
+addBookToLibrary(book2)
+addBookToLibrary(book3)

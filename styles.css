@@ -1,0 +1,12 @@
+#bookGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.bookGridItem {
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
