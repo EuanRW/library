@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/4c536a6bd5.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Library</title>
   </head>
   <body>
@@ -16,7 +20,18 @@
     <main>
       <div id="bookGrid"></div>
     </main>
-    <footer></footer>
+    <footer>
+      <p>
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        EuanRW
+      </p>
+      <a href="https://github.com/EuanRW" target="_blank">
+        <i class="fab fa-github"></i
+      ></a>
+    </footer>
     <!-- The Modal -->
     <div id="addBookModal" class="modal">
       <!-- Modal content -->
@@ -69,7 +84,15 @@
             </div>
           </form>
           <div id="formFooter">
-            <button type="submit" id="submitNewBookBtn" form="bookForm" value="Submit" class="submitBtn">Submit</button>
+            <button
+              type="submit"
+              id="submitNewBookBtn"
+              form="bookForm"
+              value="Submit"
+              class="submitBtn"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>

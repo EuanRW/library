@@ -8,6 +8,9 @@ html {
   padding: 0;
   width: 100%;
   font-family: Andale Mono, monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -22,8 +25,25 @@ header {
   /* padding: 10px 10px 10px 20px; */
 }
 
+main {
+    flex: 1;
+}
+
+footer {
+  min-height: 50px;
+  background-color: rgb(251, 251, 250);
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  border-top: 1px solid rgb(233, 233, 231);
+  box-shadow: rgba(149, 157, 165, 0.1) 10px -8px 10px;
+  gap: 5px;
+  font-size: 14px;
+  color: black;
+}
+
 #addBookBtn {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 button,
@@ -41,7 +61,7 @@ input[type="submit"] {
 
 button:hover,
 input[type="submit"] {
-  background-position:bottom;
+  background-position: bottom;
 }
 
 #title {
@@ -69,7 +89,7 @@ input[type="submit"] {
 }
 
 .bookGridItem p {
-    margin: 0;
+  margin: 0;
 }
 
 .bookTitle {
@@ -77,17 +97,17 @@ input[type="submit"] {
 }
 
 .deleteIcon {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 12px;
-    cursor: pointer;
-    padding: 2px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px;
 }
 
 .deleteIcon:hover {
-    background-color: lightgray;
-    border-radius: 0.25rem;
+  background-color: lightgray;
+  border-radius: 0.25rem;
 }
 
 /* The Modal (background) */
@@ -138,7 +158,7 @@ input[type="submit"] {
 }
 
 #bookForm {
-    width: 100%;
+  width: 100%;
 }
 
 .inputContainer {
@@ -176,11 +196,11 @@ input {
 }
 
 #formFooter {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .submitBtn {
-    width: 50%;
+  width: 50%;
 }
