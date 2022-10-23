@@ -1,3 +1,4 @@
+//Book logic
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -23,55 +24,118 @@ Book.prototype.info = function () {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
-
-  const bookGrid = document.getElementById("bookGrid");
-
-  const bookGridItem = document.createElement("div");
-  bookGridItem.className = "bookGridItem"
-
-  bookGrid.appendChild(bookGridItem);
-
-  //title
-  const titlePara = document.createElement("p");
-  const titleNode = document.createTextNode(book.title);
-  titlePara.appendChild(titleNode);
-  titlePara.className = "bookTitle"
-
-  //author
-  const authorPara = document.createElement("p");
-  const authorNode = document.createTextNode(book.author);
-  authorPara.appendChild(authorNode);
-  authorPara.className = "bookAuthor"
-
-  //page count
-  const pagesPara = document.createElement("p");
-  const pagesNode = document.createTextNode("Pages: " + book.pages);
-  pagesPara.appendChild(pagesNode);
-  pagesPara.className = "bookPages"
-
-  //read status
-  const readPara = document.createElement("p");
-  const readNode = document.createTextNode(book.read);
-  readPara.appendChild(readNode);
-  readPara.className = "bookReadStatus"
-
-  bookGridItem.appendChild(titlePara);
-  bookGridItem.appendChild(authorPara);
-  bookGridItem.appendChild(pagesPara);
-  bookGridItem.appendChild(readPara);
-
-
 }
 
-const book1 = new Book("The Hobit", "J.R.R Tolkien", 310, false);
-const book2 = new Book("A Promised Land", "Barrack Obama", 700, false);
-const book3 = new Book(
-  "All Quiet On The Western Front",
-  "Erich Maria Remarque",
-  200,
-  false
-);
+function createParaElement(text, classTitle) {
+  const para = document.createElement("p");
+  const node = document.createTextNode(text);
+  para.appendChild(node);
 
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-addBookToLibrary(book3);
+  para.className = classTitle;
+  return para;
+}
+
+function displayLibrary(library) {
+  const bookGrid = document.getElementById("bookGrid");
+
+  for (let i = 0; i < library.length; i++) {
+    const book = library[i];
+
+    //Create a new grid item.
+    const bookGridItem = document.createElement("div");
+    bookGridItem.className = "bookGridItem";
+    bookGrid.appendChild(bookGridItem);
+
+    //Create elements for book attribute text.
+    const titlePara = createParaElement(book.title, "bookTitle");
+    const authorPara = createParaElement(book.author, "bookAuthor");
+    const pagesPara = createParaElement(`Pages: ${book.pages}`, "bookPages");
+    const readPara = createParaElement(book.read, "bookReadStatus");
+
+    //Add book attribute text elements to new book grid item.
+    bookGridItem.appendChild(titlePara);
+    bookGridItem.appendChild(authorPara);
+    bookGridItem.appendChild(pagesPara);
+    bookGridItem.appendChild(readPara);
+  }
+}
+
+function createStartingData() {
+  const book1 = new Book("The Hobit", "J.R.R Tolkien", 310, false);
+  const book2 = new Book("A Promised Land", "Barrack Obama", 700, false);
+  const book3 = new Book(
+    "All Quiet On The Western Front",
+    "Erich Maria Remarque",
+    200,
+    false
+  );
+
+  addBookToLibrary(book1);
+  addBookToLibrary(book2);
+  addBookToLibrary(book3);
+}
+
+createStartingData();
+
+//NEW BOOK MODAL
+// Get the modal
+const newBookModal = document.getElementById("addBookModal");
+
+// Get the button that opens the modal
+const addBookBtn = document.getElementById("addBookBtn");
+
+// Get the <span> element that closes the modal
+const closeModalSpan = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+addBookBtn.onclick = function () {
+  newBookModal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+closeModalSpan.onclick = function () {
+  newBookModal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == newBookModal) {
+    newBookModal.style.display = "none";
+  }
+};
+
+//NEW BOOK FORM
+const formInputs = document.getElementById("bookForm").elements;
+
+const submitNewBookBtn = document.getElementById("submitNewBookBtn");
+
+const inputs = document.getElementsByTagName("input");
+
+let arrTruthChecker = (arr) => arr.every((el) => el === true);
+
+const bookForm = document.querySelector('bookForm');
+bookForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  let validInputArray = [];
+
+  for (let i = 0; i < inputs.length; i++) {
+    validInputArray.push(inputs[i].checkValidity());
+  }
+
+  if (arrTruthChecker(validInputArray) == true) {
+    const book = new Book(
+      formInputs.bookTitle.value,
+      formInputs.bookAuthor.value,
+      formInputs.bookPages.value,
+      formInputs.bookReadStatus.value
+    );
+    addBookToLibrary(book);
+    console.log(myLibrary)
+  } else {
+    //Do nothing.
+  }
+});
+
+
+displayLibrary(myLibrary);

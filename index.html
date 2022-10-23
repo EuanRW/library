@@ -10,17 +10,70 @@
   </head>
   <body>
     <header>
-      <h1>Library</h1>
+      <h1 id="title">📚 Library</h1>
+      <button id="addBookBtn">+ Add Book</button>
     </header>
     <main>
-        <button id="addBookButton">+ Add Book</button>
-        <div id="bookGrid">
-          
-        </div>
+      <div id="bookGrid"></div>
     </main>
-    <footer>
+    <footer></footer>
+    <!-- The Modal -->
+    <div id="addBookModal" class="modal">
+      <!-- Modal content -->
+      <div class="modalContent">
+        <span class="close">&times;</span>
+        <div class="formContainer">
+          <form action="#" method="get" id="bookForm">
+            <div id="bookTitleContainer" class="inputContainer">
+              <label for="bookTitle">TITLE</label>
+              <input
+                type="text"
+                id="bookTitle"
+                name="bookTitle"
+                placeholder="Hairy Maclary..."
+                required
+              />
+            </div>
 
-    </footer>
+            <div id="bookAuthorContainer" class="inputContainer">
+              <label for="bookAuthor">AUTHOR</label>
+              <input
+                type="text"
+                id="bookAuthor"
+                name="author"
+                placeholder="Lynley Dodd"
+                required
+              />
+            </div>
+
+            <div id="bookPagesContainer" class="inputContainer">
+              <label for="bookPages">PAGES</label>
+              <input
+                type="number"
+                id="bookPages"
+                name="pages"
+                placeholder="17..."
+                required
+              />
+            </div>
+
+            <div id="bookReadStatusContainer">
+              <label for="bookReadStatus">
+                <input
+                  type="checkbox"
+                  id="bookReadStatus"
+                  name="bookReadStatus"
+                />
+                Completed
+              </label>
+            </div>
+          </form>
+          <div id="formFooter">
+            <button type="submit" id="submitNewBookBtn" form="bookForm" value="Submit" class="submitBtn">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>
