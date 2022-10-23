@@ -64,10 +64,30 @@ input[type="submit"] {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+  padding: 6px;
+}
+
+.bookGridItem p {
+    margin: 0;
 }
 
 .bookTitle {
   font-weight: bold;
+}
+
+.deleteIcon {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.deleteIcon:hover {
+    background-color: lightgray;
+    border-radius: 0.25rem;
 }
 
 /* The Modal (background) */

@@ -1,11 +1,12 @@
-//Book logic
+//#region BOOK LOGIC
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, displayed) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.displayed = displayed;
 }
 
 Book.prototype.info = function () {
@@ -26,6 +27,9 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+//#endregion
+
+//#region APP Functions
 function createParaElement(text, classTitle) {
   const para = document.createElement("p");
   const node = document.createTextNode(text);
@@ -38,8 +42,10 @@ function createParaElement(text, classTitle) {
 function displayLibrary(library) {
   const bookGrid = document.getElementById("bookGrid");
 
-  for (let i = 0; i < library.length; i++) {
-    const book = library[i];
+  const nonDisplayedBooks = library.filter(val => val.displayed === false);
+
+  for (let i = 0; i < nonDisplayedBooks.length; i++) {
+    const book = nonDisplayedBooks[i];
 
     //Create a new grid item.
     const bookGridItem = document.createElement("div");
@@ -50,23 +56,34 @@ function displayLibrary(library) {
     const titlePara = createParaElement(book.title, "bookTitle");
     const authorPara = createParaElement(book.author, "bookAuthor");
     const pagesPara = createParaElement(`Pages: ${book.pages}`, "bookPages");
-    const readPara = createParaElement(book.read, "bookReadStatus");
+    const readPara = createParaElement((book.read) ? 'Status: Read' : 'Status: Unread', "bookReadStatus");
+
+    //Create delete icon
+    const deletePara = createParaElement('❌', 'deleteIcon')
+    deletePara.addEventListener('click', (event) => {
+      bookGridItem.remove()
+    })
 
     //Add book attribute text elements to new book grid item.
     bookGridItem.appendChild(titlePara);
     bookGridItem.appendChild(authorPara);
     bookGridItem.appendChild(pagesPara);
     bookGridItem.appendChild(readPara);
+
+    bookGridItem.appendChild(deletePara);
+
+    book.displayed = true
   }
 }
 
-function createStartingData() {
-  const book1 = new Book("The Hobit", "J.R.R Tolkien", 310, false);
-  const book2 = new Book("A Promised Land", "Barrack Obama", 700, false);
+function createMockData() {
+  const book1 = new Book("The Hobit", "J.R.R Tolkien", 310, false, false);
+  const book2 = new Book("A Promised Land", "Barrack Obama", 700, false, false);
   const book3 = new Book(
     "All Quiet On The Western Front",
     "Erich Maria Remarque",
     200,
+    false,
     false
   );
 
@@ -75,9 +92,9 @@ function createStartingData() {
   addBookToLibrary(book3);
 }
 
-createStartingData();
+//#endregion
 
-//NEW BOOK MODAL
+//#region NEW BOOK MODAL
 // Get the modal
 const newBookModal = document.getElementById("addBookModal");
 
@@ -103,8 +120,9 @@ window.onclick = function (event) {
     newBookModal.style.display = "none";
   }
 };
+//#endregion
 
-//NEW BOOK FORM
+//#region NEW BOOK FORM
 const formInputs = document.getElementById("bookForm").elements;
 
 const submitNewBookBtn = document.getElementById("submitNewBookBtn");
@@ -113,8 +131,8 @@ const inputs = document.getElementsByTagName("input");
 
 let arrTruthChecker = (arr) => arr.every((el) => el === true);
 
-const bookForm = document.querySelector('bookForm');
-bookForm.addEventListener('submit', event => {
+const bookForm = document.querySelector("#bookForm");
+bookForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   let validInputArray = [];
@@ -128,14 +146,21 @@ bookForm.addEventListener('submit', event => {
       formInputs.bookTitle.value,
       formInputs.bookAuthor.value,
       formInputs.bookPages.value,
-      formInputs.bookReadStatus.value
+      formInputs.bookReadStatus.value,
+      false
     );
     addBookToLibrary(book);
-    console.log(myLibrary)
+
+    displayLibrary(myLibrary);
+
+    newBookModal.style.display = "none";
+    console.log(myLibrary);
   } else {
     //Do nothing.
   }
 });
 
+//#endregion
 
+createMockData();
 displayLibrary(myLibrary);
